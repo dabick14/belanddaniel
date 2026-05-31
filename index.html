@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel &amp; Kukua — June 4, 2026</title>
+  <meta name="description" content="You are invited to celebrate the wedding of Daniel Dadzie &amp; Belfrieda Kukua Asamoah — June 4, 2026, First Love City Church, East Legon.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Custom Properties ─────────────────────────────── */
+    :root {
+      /* Base */
+      --color-bg:           #FAF8F5;
+      --color-bg-alt:       #F2EDE6;
+      --color-surface:      #FFFFFF;
+
+      /* Text */
+      --color-text-primary: #1C1A18;
+      --color-text-body:    #3D3A36;
+      --color-text-muted:   #9A9189;
+
+      /* Accent — champagne gold */
+      --color-accent:       #B5A882;
+
+      /* Borders */
+      --color-border:       #E2DDD6;
+
+      /* Type scale */
+      --text-hero:    clamp(3.5rem, 10vw, 8rem);
+      --text-display: clamp(2rem, 5vw, 3.5rem);
+      --text-chapter: clamp(1.4rem, 3vw, 2rem);
+      --text-body:    clamp(1rem, 1.5vw, 1.15rem);
+      --text-label:   0.75rem;
+      --text-button:  0.85rem;
+
+      --leading-tight:   1.1;
+      --leading-body:    1.8;
+      --leading-display: 1.2;
+
+      --tracking-wide: 0.15em;
+      --tracking-hero: -0.02em;
+
+      /* Layout */
+      --container-max:      860px;
+      --container-wide:     1100px;
+      --section-padding-y:  clamp(5rem, 10vw, 9rem);
+      --section-padding-x:  clamp(1.5rem, 5vw, 3rem);
+      --gap-sm: 1rem;
+      --gap-md: 2rem;
+      --gap-lg: 4rem;
+    }
+
+    /* ─── Reset ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      background-color: var(--color-bg);
+      color: var(--color-text-body);
+      line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body.nav-open { overflow: hidden; }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Layout helpers ────────────────────────────────── */
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--section-padding-x);
+    }
+
+    section { padding: var(--section-padding-y) 0; }
+
+    /* ─── Eyebrow label ─────────────────────────────────── */
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: var(--text-label);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── Decorative rule ───────────────────────────────── */
+    .deco-rule {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      width: 60px;
+      margin: 2.5rem auto;
+    }
+
+    /* ─── Section header block ──────────────────────────── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── Scroll reveal ─────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════════════════ */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.25rem var(--section-padding-x);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--color-border);
+      transition: transform 0.3s ease;
+      font-family: 'Jost', sans-serif;
+      font-size: var(--text-label);
+      letter-spacing: 0.15em;
+    }
+    .site-nav.hidden { transform: translateY(-100%); }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      color: var(--color-text-primary);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      font-weight: 300;
+      color: var(--color-text-body);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--color-text-primary); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-photos-link {
+      font-weight: 400;
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+      padding: 0.45rem 1rem;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-photos-link:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-primary);
+      font-size: 1.3rem;
+      line-height: 1;
+      padding: 0.25rem;
+    }
+
+    /* Mobile overlay */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--color-bg);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    body.nav-open .nav-overlay {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .nav-overlay-close {
+      position: absolute;
+      top: 1.5rem;
+      right: var(--section-padding-x);
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      line-height: 1;
+    }
+
+    .nav-overlay a {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 6vw, 3rem);
+      color: var(--color-text-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-overlay-photos {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      border: 1px solid var(--color-accent);
+      padding: 0.65rem 1.5rem;
+      border-radius: 2px;
+      margin-top: 0.5rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 6rem var(--section-padding-x) 4rem;
+      background: var(--color-bg);
+    }
+
+    .hero-bg-initials {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 15vw;
+      color: var(--color-text-primary);
+      opacity: 0.05;
+      letter-spacing: 0.1em;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-names {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: var(--text-hero);
+      letter-spacing: var(--tracking-hero);
+      line-height: var(--leading-tight);
+      color: var(--color-text-primary);
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    .hero-date {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      letter-spacing: 0.3em;
+      color: var(--color-text-muted);
+      text-transform: lowercase;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-scripture {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--color-text-muted);
+      max-width: 460px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-scroll-cue {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-scroll-cue span {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 44px;
+      background: var(--color-accent);
+      transform-origin: top center;
+      animation: scrollDown 2s ease-in-out infinite;
+    }
+    @keyframes scrollDown {
+      0%   { transform: scaleY(0); opacity: 0; transform-origin: top center; }
+      45%  { transform: scaleY(1); opacity: 1; }
+      55%  { transform: scaleY(1); opacity: 1; }
+      100% { transform: scaleY(0); opacity: 0; transform-origin: bottom center; }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       OUR STORY
+    ═══════════════════════════════════════════════════════ */
+    .story-text {
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+      color: var(--color-text-body);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .story-text p + p { margin-top: 1.5rem; }
+
+    .pull-quote {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.55;
+      color: var(--color-text-primary);
+      text-align: center;
+      max-width: 620px;
+      margin: 3.5rem auto 0;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SCHEDULE
+    ═══════════════════════════════════════════════════════ */
+    .schedule { background: var(--color-bg-alt); }
+
+    /* Countdown */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: clamp(1.5rem, 4vw, 3.5rem);
+      margin: 0 0 3.5rem;
+      flex-wrap: wrap;
+    }
+    .countdown-unit { text-align: center; }
+
+    .countdown-number {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--color-text-primary);
+      line-height: 1;
+      display: block;
+    }
+    .countdown-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      display: block;
+      margin-top: 0.4rem;
+    }
+    .countdown-done {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--color-accent);
+      text-align: center;
+    }
+
+    /* Event cards */
+    .event-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-md);
+    }
+
+    .event-card {
+      border-top: 2px solid var(--color-accent);
+      padding: 2rem 1.75rem;
+      background: var(--color-surface);
+    }
+
+    .event-badge {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+
+    .event-date {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+      color: var(--color-text-primary);
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .event-venue {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 1.05rem;
+      color: var(--color-text-body);
+      line-height: 1.6;
+    }
+
+    .event-map-link {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      border-bottom: 1px solid var(--color-accent);
+      display: inline-block;
+      margin-top: 0.6rem;
+      transition: opacity 0.2s;
+    }
+    .event-map-link:hover { opacity: 0.65; }
+
+    .event-note {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-top: 1rem;
+    }
+
+    .dress-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+    }
+
+    .event-private-note {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      margin-top: 0.5rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       TIDBITS
+    ═══════════════════════════════════════════════════════ */
+    .tidbits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-md);
+    }
+
+    .tidbit-card {
+      border-top: 1px solid var(--color-accent);
+      padding: 1.5rem 0;
+    }
+
+    .tidbit-question {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .tidbit-answer {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      color: var(--color-text-primary);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       GIFTS
+    ═══════════════════════════════════════════════════════ */
+    .gifts { background: var(--color-bg-alt); }
+
+    .gifts-intro {
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+      color: var(--color-text-body);
+      max-width: 580px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .payment-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-md);
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .payment-block {
+      border: 1px solid var(--color-border);
+      padding: 1.75rem 2rem;
+      background: var(--color-surface);
+    }
+
+    .payment-method {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .payment-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 1.2rem;
+      color: var(--color-text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .payment-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .payment-number {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--color-text-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .payment-sort {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .copy-btn {
+      background: none;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 0.8rem;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .copy-btn:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+    .copy-btn.copied {
+      border-color: #8aac8a;
+      color: #8aac8a;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FAQ
+    ═══════════════════════════════════════════════════════ */
+    .faq-list { list-style: none; }
+
+    .faq-item { border-top: 1px solid var(--color-border); }
+    .faq-item:last-child { border-bottom: 1px solid var(--color-border); }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.25rem 0;
+      cursor: pointer;
+      text-align: left;
+      gap: 1rem;
+    }
+
+    .faq-question-text {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      color: var(--color-text-primary);
+    }
+
+    .faq-icon {
+      font-size: 1.3rem;
+      color: var(--color-text-muted);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-answer-inner {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: var(--text-body);
+      color: var(--color-text-body);
+      line-height: var(--leading-body);
+      padding-bottom: 1.25rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FAITH
+    ═══════════════════════════════════════════════════════ */
+    .faith {
+      background: var(--color-bg-alt);
+      text-align: center;
+    }
+
+    .faith-opening {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.3rem;
+      color: var(--color-text-primary);
+      max-width: 580px;
+      margin: 0 auto 2rem;
+      line-height: 1.75;
+    }
+
+    .faith-body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: var(--text-body);
+      color: var(--color-text-body);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      line-height: var(--leading-body);
+    }
+
+    .prayer-accordion {
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+    }
+
+    .prayer-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .prayer-trigger-text {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      color: var(--color-text-primary);
+    }
+
+    .prayer-icon {
+      font-size: 1.3rem;
+      color: var(--color-text-muted);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .prayer-accordion.open .prayer-icon { transform: rotate(45deg); }
+
+    .prayer-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+
+    .prayer-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.05rem;
+      color: var(--color-text-body);
+      line-height: 1.95;
+      padding: 0 1.5rem 1.75rem;
+      text-align: left;
+    }
+
+    .faith-wa-link {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+      border-bottom: 1px solid var(--color-accent);
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .faith-wa-link:hover { opacity: 0.65; }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════ */
+    footer {
+      text-align: center;
+      padding: var(--section-padding-y) var(--section-padding-x);
+    }
+
+    .footer-quote {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: var(--color-text-primary);
+      line-height: 1.5;
+      max-width: 480px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .footer-names {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      color: var(--color-text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-made {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      opacity: 0.55;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FLOATING UPLOAD (mobile only)
+    ═══════════════════════════════════════════════════════ */
+    .float-upload {
+      display: none;
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 90;
+      background: var(--color-accent);
+      color: var(--color-bg);
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      padding: 0.75rem 1.25rem;
+      border-radius: 2px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      transition: opacity 0.2s;
+    }
+    .float-upload:hover { opacity: 0.85; }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .nav-links,
+      .nav-photos-link { display: none; }
+
+      .nav-hamburger { display: block; }
+
+      .event-cards { grid-template-columns: 1fr; }
+
+      .tidbits-grid { grid-template-columns: 1fr; }
+
+      .float-upload { display: inline-block; }
+
+      .payment-block { padding: 1.5rem; }
+    }
+
+    @media (min-width: 769px) {
+      .nav-hamburger { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════════════ -->
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+    <div class="nav-brand">D &amp; K</div>
+    <ul class="nav-links">
+      <li><a href="#story">our story</a></li>
+      <li><a href="#schedule">schedule</a></li>
+      <li><a href="#tidbits">tidbits</a></li>
+      <li><a href="#gifts">gifts</a></li>
+      <li><a href="#faq">faq</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/upload" class="nav-photos-link">Share your photos</a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav overlay -->
+  <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
+    <button class="nav-overlay-close" id="nav-overlay-close" aria-label="Close menu">&times;</button>
+    <a href="#story"    class="nav-ol">our story</a>
+    <a href="#schedule" class="nav-ol">schedule</a>
+    <a href="#tidbits"  class="nav-ol">tidbits</a>
+    <a href="#gifts"    class="nav-ol">gifts</a>
+    <a href="#faq"      class="nav-ol">faq</a>
+    <a href="#faith"    class="nav-ol">faith</a>
+    <a href="/upload" class="nav-overlay-photos">📷 Share photos</a>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════════════ -->
+  <section class="hero" aria-label="Welcome">
+    <div class="hero-bg-initials" aria-hidden="true">D &amp; K</div>
+    <div class="hero-content">
+      <span class="eyebrow">you are invited to celebrate</span>
+      <h1 class="hero-names">Daniel &amp; Kukua</h1>
+      <p class="hero-date">june 4, 2026</p>
+      <p class="hero-scripture">"He hath made every thing beautiful in his time." — Ecclesiastes 3:11</p>
+      <div class="hero-scroll-cue" aria-hidden="true">
+        <span>scroll to explore</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       OUR STORY
+  ═══════════════════════════════════════════════════════ -->
+  <section id="story">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">thank god for meetings after church</span>
+      </div>
+
+      <div class="story-text reveal">
+        <p>We're both in First Love City Church. Well… Daniel is in Thika campus (Kenya) now, but he still keeps tabs on the Accra platform, so make of that what you will.</p>
+        <p>We started noticing each other because Bel was pretty loud and had plenty to say in meetings (Pastor C must be tired of her by now), and I was never really quiet either. Somehow that became the beginning of us actually talking.</p>
+        <p>After a few months, I called her. Wanted to take her out, but she was sick, so instead we had a phone conversation.</p>
+        <p>That call was the first proper step. From there, things grew naturally. Just two people who already knew each other a little, getting to know each other properly.</p>
+        <p>And now, by the grace of God, here we are. I got the nice girl. She inherited my mother's project. Pray for us!</p>
+      </div>
+
+      <blockquote class="pull-quote reveal">
+        "Just two people who already knew each other a little, getting to know each other properly."
+      </blockquote>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SCHEDULE
+  ═══════════════════════════════════════════════════════ -->
+  <section id="schedule" class="schedule">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">so please join us...</span>
+      </div>
+
+      <div class="countdown reveal" id="countdown">
+        <div class="countdown-unit">
+          <span class="countdown-number" id="cd-days">00</span>
+          <span class="countdown-label">days</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-number" id="cd-hours">00</span>
+          <span class="countdown-label">hours</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-number" id="cd-minutes">00</span>
+          <span class="countdown-label">minutes</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-number" id="cd-seconds">00</span>
+          <span class="countdown-label">seconds</span>
+        </div>
+      </div>
+
+      <div class="event-cards">
+        <div class="event-card reveal">
+          <span class="event-badge">Private Event</span>
+          <p class="event-date">wednesday, 3rd june 2026</p>
+          <p class="event-private-note">Details shared privately.</p>
+        </div>
+
+        <div class="event-card reveal">
+          <span class="event-badge">Wedding &amp; Cocktail</span>
+          <p class="event-date">thursday, 4th june 2026</p>
+          <p class="event-venue">First Love Center<br>Trinity Avenue, East Legon</p>
+          <a href="https://maps.app.goo.gl/Z9YXWaPsEMBmmszb8?g_st=ic"
+             target="_blank" rel="noopener noreferrer"
+             class="event-map-link">view on maps →</a>
+          <p class="event-note">Photography &amp; Cocktail immediately after Ceremony at the same venue.</p>
+          <span class="dress-badge">All things bright &amp; beautiful</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       TIDBITS
+  ═══════════════════════════════════════════════════════ -->
+  <section id="tidbits">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">a few things you should know about us</span>
+      </div>
+
+      <div class="tidbits-grid">
+        <div class="tidbit-card reveal">
+          <span class="tidbit-question">Who made the first move?</span>
+          <p class="tidbit-answer">Daniel called. She was sick, so they talked on the phone instead.</p>
+        </div>
+        <div class="tidbit-card reveal">
+          <span class="tidbit-question">Who takes out the bin?</span>
+          <p class="tidbit-answer">Daniel.</p>
+        </div>
+        <div class="tidbit-card reveal">
+          <span class="tidbit-question">Most memorable date?</span>
+          <p class="tidbit-answer">Holiday Inn, the night before he left for Nairobi.</p>
+        </div>
+        <div class="tidbit-card reveal">
+          <span class="tidbit-question">Favourite activity together?</span>
+          <p class="tidbit-answer">Talking.</p>
+        </div>
+        <div class="tidbit-card reveal">
+          <span class="tidbit-question">Honeymoon destination?</span>
+          <p class="tidbit-answer">Ask Daniel 😅</p>
+        </div>
+        <div class="tidbit-card reveal">
+          <span class="tidbit-question">Most memorable trip?</span>
+          <p class="tidbit-answer">Road trip to Takoradi.</p>
+        </div>
+        <div class="tidbit-card reveal">
+          <span class="tidbit-question">We agree on?</span>
+          <p class="tidbit-answer">Our faith and belief in Jesus Christ as our Lord and personal Saviour.</p>
+        </div>
+        <div class="tidbit-card reveal">
+          <span class="tidbit-question">Who's funnier?</span>
+          <p class="tidbit-answer">Daniel says Daniel. The correct answer is Kukua.</p>
+        </div>
+        <div class="tidbit-card reveal">
+          <span class="tidbit-question">Were these answered under duress?</span>
+          <p class="tidbit-answer">Absolutely 🤣</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       GIFTS
+  ═══════════════════════════════════════════════════════ -->
+  <section id="gifts" class="gifts">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">your presence is the greatest gift</span>
+      </div>
+
+      <p class="gifts-intro reveal">As Daniel is whisking Kukua away to Nairobi, we kindly request no physical gifts. If you'd like, contributions to our honeymoon or future plans would be warmly appreciated.</p>
+
+      <div class="payment-blocks">
+
+        <div class="payment-block reveal">
+          <span class="payment-method">MTN Mobile Money</span>
+          <p class="payment-name">Belfrieda Kukua Asamoah</p>
+          <div class="payment-row">
+            <span class="payment-number">0549526397</span>
+            <button class="copy-btn" data-copy="0549526397">Copy</button>
+          </div>
+        </div>
+
+        <div class="payment-block reveal">
+          <span class="payment-method">Stanbic Bank</span>
+          <p class="payment-name">Daniel Dadzie</p>
+          <div class="payment-row">
+            <div>
+              <div class="payment-number">9040013102222</div>
+              <div class="payment-sort">Sort Code: 190114</div>
+            </div>
+            <button class="copy-btn" data-copy="9040013102222">Copy</button>
+          </div>
+        </div>
+
+        <div class="payment-block reveal">
+          <span class="payment-method">Stanbic Bank</span>
+          <p class="payment-name">Belfrieda Kukua Asamoah</p>
+          <div class="payment-row">
+            <div>
+              <div class="payment-number">9040000099079</div>
+              <div class="payment-sort">Sort Code: 190110</div>
+            </div>
+            <button class="copy-btn" data-copy="9040000099079">Copy</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       FAQ
+  ═══════════════════════════════════════════════════════ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">questions and answers</span>
+      </div>
+
+      <ul class="faq-list reveal" role="list">
+
+        <li class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">Can I bring a date?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <p class="faq-answer-inner">Please reach out to us directly to arrange this.</p>
+          </div>
+        </li>
+
+        <li class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">Are kids welcome?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <p class="faq-answer-inner">Yes!</p>
+          </div>
+        </li>
+
+        <li class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">What should I wear?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <p class="faq-answer-inner">All things bright &amp; beautiful — see the Schedule section for details.</p>
+          </div>
+        </li>
+
+        <li class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">Is the wedding indoors or outdoors?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <p class="faq-answer-inner">The ceremony is indoors. The cocktail will be outdoors.</p>
+          </div>
+        </li>
+
+        <li class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">Can I take photos?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <p class="faq-answer-inner">Yes! Just be mindful of the official photographers. Share your photos with us via the QR code we'll provide on the day — or visit the link in the nav.</p>
+          </div>
+        </li>
+
+        <li class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">Who should I call with questions?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <p class="faq-answer-inner">Elizura Asamoah-Koomson: 0202953372 · Telinam Eli: 0540678253 · Rosebud Arthur: 0243312960</p>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       FAITH
+  ═══════════════════════════════════════════════════════ -->
+  <section id="faith" class="faith">
+    <div class="container">
+
+      <div class="reveal">
+        <p class="faith-opening">As we celebrate this beautiful season of love, we want to share the foundation of our joy — a personal relationship with God through Jesus Christ.</p>
+      </div>
+
+      <hr class="deco-rule">
+
+      <div class="reveal">
+        <p class="faith-body">Everything beautiful in our story is a gift from God. We didn't engineer this — He did. And at the centre of all of it is a God who loves people far beyond what any wedding can express. If you've never met Him, we'd love for today to be the beginning of that. The door is wide open, and it starts with a simple conversation with Him.</p>
+      </div>
+
+      <div class="prayer-accordion reveal" id="prayer-accordion">
+        <button class="prayer-trigger" id="prayer-trigger" aria-expanded="false">
+          <span class="prayer-trigger-text">Pray with us</span>
+          <span class="prayer-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="prayer-body" id="prayer-body">
+          <p class="prayer-text">"Heavenly Father, I come to You today acknowledging that I am a sinner and that I need Your forgiveness. I believe that Jesus Christ is Your Son, that He died for my sins, and that You raised Him from the dead. Today, I turn away from my sins and invite Jesus into my heart and my life as my Lord and Savior. Please forgive me, make me new, and help me to follow You all the days of my life. Thank You for loving me, saving me, and giving me eternal life. In Jesus' name, Amen."</p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <a href="https://wa.me/233244978433"
+           target="_blank" rel="noopener noreferrer"
+           class="faith-wa-link">If you prayed this prayer, we'd love to hear from you.</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════ -->
+  <footer>
+    <hr class="deco-rule">
+    <blockquote class="footer-quote reveal">"He hath made every thing beautiful in his time."</blockquote>
+    <p class="footer-names reveal">Daniel &amp; Kukua · june 4, 2026</p>
+    <p class="footer-made reveal">Made with love ♡</p>
+  </footer>
+
+
+  <!-- Floating upload CTA (mobile only) -->
+  <a href="/upload" class="float-upload" aria-label="Share your photos">📷 Share photos</a>
+
+
+  <script>
+    /* ─── NAV: hide on scroll down, reveal on scroll up ── */
+    const siteNav    = document.getElementById('site-nav');
+    let   lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y > lastScrollY && y > 80) {
+        siteNav.classList.add('hidden');
+      } else {
+        siteNav.classList.remove('hidden');
+      }
+      lastScrollY = y;
+    }, { passive: true });
+
+
+    /* ─── NAV: mobile hamburger ──────────────────────── */
+    const hamburger      = document.getElementById('nav-hamburger');
+    const navOverlay     = document.getElementById('nav-overlay');
+    const navOverlayClose = document.getElementById('nav-overlay-close');
+    const navOlLinks     = document.querySelectorAll('.nav-ol, .nav-overlay-photos');
+
+    function openNav() {
+      document.body.classList.add('nav-open');
+      navOverlay.setAttribute('aria-hidden', 'false');
+      hamburger.setAttribute('aria-expanded', 'true');
+    }
+    function closeNav() {
+      document.body.classList.remove('nav-open');
+      navOverlay.setAttribute('aria-hidden', 'true');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    hamburger.addEventListener('click', openNav);
+    navOverlayClose.addEventListener('click', closeNav);
+    navOlLinks.forEach(link => link.addEventListener('click', closeNav));
+
+
+    /* ─── COUNTDOWN TIMER ────────────────────────────── */
+    const targetDate = new Date('2026-06-04T00:00:00').getTime();
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function tick() {
+      const diff = targetDate - Date.now();
+      if (diff <= 0) {
+        clearInterval(cdInterval);
+        document.getElementById('countdown').innerHTML =
+          '<p class="countdown-done">Today is the day!</p>';
+        return;
+      }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000)  / 60000);
+      const s = Math.floor((diff % 60000)    / 1000);
+      document.getElementById('cd-days').textContent    = pad(d);
+      document.getElementById('cd-hours').textContent   = pad(h);
+      document.getElementById('cd-minutes').textContent = pad(m);
+      document.getElementById('cd-seconds').textContent = pad(s);
+    }
+
+    tick();
+    const cdInterval = setInterval(tick, 1000);
+
+
+    /* ─── FAQ ACCORDION ──────────────────────────────── */
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const btn    = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      const inner  = item.querySelector('.faq-answer-inner');
+
+      btn.addEventListener('click', () => {
+        const wasOpen = item.classList.contains('open');
+
+        /* close all */
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          i.querySelector('.faq-answer').style.maxHeight = null;
+        });
+
+        /* open this one if it was closed */
+        if (!wasOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = inner.scrollHeight + 'px';
+        }
+      });
+    });
+
+
+    /* ─── PRAYER ACCORDION ───────────────────────────── */
+    const prayerAccordion = document.getElementById('prayer-accordion');
+    const prayerTrigger   = document.getElementById('prayer-trigger');
+    const prayerBody      = document.getElementById('prayer-body');
+    const prayerText      = prayerBody.querySelector('.prayer-text');
+
+    prayerTrigger.addEventListener('click', () => {
+      const open = prayerAccordion.classList.toggle('open');
+      prayerTrigger.setAttribute('aria-expanded', String(open));
+      prayerBody.style.maxHeight = open
+        ? (prayerText.scrollHeight + 40) + 'px'
+        : null;
+    });
+
+
+    /* ─── COPY TO CLIPBOARD ──────────────────────────── */
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const text = btn.dataset.copy;
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          /* fallback for older / restricted browsers */
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+
+
+    /* ─── SCROLL REVEAL ──────────────────────────────── */
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,985 @@
+<!--
+  CLOUDINARY SETUP (do this before going live):
+  1. Create a free Cloudinary account at cloudinary.com
+  2. Go to Settings > Upload > Upload Presets
+  3. Click "Add upload preset"
+  4. Set Signing Mode to "Unsigned"
+  5. Set Folder to "daniel-kukua-wedding" (or any name)
+  6. Save and copy the preset name
+  7. Copy your Cloud Name from the Cloudinary dashboard home
+  8. Replace YOUR_CLOUD_NAME and YOUR_UPLOAD_PRESET below
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Share Your Photos · Daniel & Kukua</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS Custom Properties ─────────────────────────────────────── */
+    :root {
+      /* Base */
+      --color-bg: #FAF8F5;
+      --color-bg-alt: #F2EDE6;
+      --color-surface: #FFFFFF;
+
+      /* Text */
+      --color-text-primary: #1C1A18;
+      --color-text-body: #3D3A36;
+      --color-text-muted: #9A9189;
+
+      /* Accent */
+      --color-accent: #B5A882;
+
+      /* Borders */
+      --color-border: #E2DDD6;
+
+      /* Type Scale */
+      --text-hero: clamp(3.5rem, 10vw, 8rem);
+      --text-display: clamp(2rem, 5vw, 3.5rem);
+      --text-chapter: clamp(1.4rem, 3vw, 2rem);
+      --text-body: clamp(1rem, 1.5vw, 1.15rem);
+      --text-label: 0.75rem;
+      --text-button: 0.85rem;
+
+      --leading-tight: 1.1;
+      --leading-body: 1.8;
+      --leading-display: 1.2;
+
+      --tracking-wide: 0.15em;
+      --tracking-hero: -0.02em;
+
+      /* Layout */
+      --container-max: 860px;
+      --container-wide: 1100px;
+      --section-padding-y: clamp(5rem, 10vw, 9rem);
+      --section-padding-x: clamp(1.5rem, 5vw, 3rem);
+      --gap-sm: 1rem;
+      --gap-md: 2rem;
+      --gap-lg: 4rem;
+    }
+
+    /* ─── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text-body);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────────────── */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.25rem var(--section-padding-x);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--color-border);
+      transition: transform 0.3s ease;
+      font-family: 'Jost', sans-serif;
+      font-size: var(--text-label);
+      letter-spacing: var(--tracking-wide);
+    }
+
+    .nav-brand {
+      font-family: 'Jost', sans-serif;
+      font-size: var(--text-label);
+      font-weight: 400;
+      letter-spacing: var(--tracking-wide);
+      color: var(--color-text-primary);
+      text-decoration: none;
+    }
+
+    .nav-page-title {
+      font-family: 'Jost', sans-serif;
+      font-size: var(--text-label);
+      font-weight: 300;
+      letter-spacing: var(--tracking-wide);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+
+    /* ─── Main Layout ────────────────────────────────────────────────── */
+    .page-wrapper {
+      min-height: 100svh;
+      padding-top: calc(3.75rem + 1px); /* nav height */
+    }
+
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--section-padding-x);
+    }
+
+    /* ─── Page Header ────────────────────────────────────────────────── */
+    .page-header {
+      text-align: center;
+      padding: clamp(3rem, 8vw, 6rem) var(--section-padding-x) clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: var(--text-label);
+      font-weight: 300;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .page-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: var(--text-display);
+      font-weight: 300;
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-hero);
+      color: var(--color-text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .page-subheading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--color-text-muted);
+      line-height: var(--leading-body);
+    }
+
+    /* ─── Upload Section ─────────────────────────────────────────────── */
+    .upload-section {
+      padding: 0 var(--section-padding-x) clamp(4rem, 8vw, 7rem);
+    }
+
+    /* ─── Guest Name Field ───────────────────────────────────────────── */
+    .guest-name-field {
+      max-width: 420px;
+      margin: 0 auto var(--gap-md);
+    }
+
+    .guest-name-field label {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .guest-name-field input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid var(--color-border);
+      background: transparent;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--color-text-primary);
+      padding: 0.4rem 0;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .guest-name-field input:focus {
+      border-bottom-color: var(--color-accent);
+    }
+
+    .guest-name-field input::placeholder {
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    /* ─── Drop Zone ──────────────────────────────────────────────────── */
+    .drop-zone {
+      max-width: 640px;
+      margin: 0 auto;
+      border: 2px dashed var(--color-accent);
+      border-radius: 4px;
+      background: var(--color-bg-alt);
+      padding: clamp(2.5rem, 6vw, 4rem) 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-style 0.2s ease, background 0.2s ease;
+      position: relative;
+    }
+
+    .drop-zone.drag-over {
+      border-style: solid;
+      background: #EDE7DC;
+    }
+
+    .drop-zone-icon {
+      display: block;
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 1.25rem;
+      color: var(--color-accent);
+    }
+
+    .drop-zone-primary {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--color-text-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .drop-zone-secondary {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--color-text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    #file-input {
+      display: none;
+    }
+
+    /* ─── Validation Banner ──────────────────────────────────────────── */
+    .validation-banner {
+      max-width: 640px;
+      margin: 0.75rem auto 0;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: #9A4A4A;
+      text-align: center;
+      display: none;
+    }
+
+    .validation-banner.visible {
+      display: block;
+    }
+
+    /* ─── Preview Grid ───────────────────────────────────────────────── */
+    .preview-section {
+      max-width: 640px;
+      margin: var(--gap-md) auto 0;
+      display: none;
+    }
+
+    .preview-section.visible {
+      display: block;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 560px) {
+      .preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .preview-tile {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+    }
+
+    .preview-tile-img-wrap {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+    }
+
+    .preview-tile-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Status overlay */
+    .tile-status {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .tile-status.uploading {
+      opacity: 1;
+      background: rgba(250, 248, 245, 0.75);
+    }
+
+    .tile-status.success {
+      opacity: 1;
+      background: rgba(250, 248, 245, 0.82);
+    }
+
+    .tile-status.error {
+      opacity: 1;
+      background: rgba(250, 248, 245, 0.82);
+    }
+
+    /* Progress bar */
+    .tile-progress-track {
+      width: 60%;
+      height: 2px;
+      background: var(--color-border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .tile-progress-bar {
+      height: 100%;
+      background: var(--color-accent);
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .tile-status-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .tile-status.success .tile-status-icon { color: #5A8A6A; }
+    .tile-status.error  .tile-status-icon { color: #9A4A4A; }
+
+    .tile-error-msg {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: #9A4A4A;
+      text-align: center;
+      padding: 0 0.5rem;
+      margin-top: 0.25rem;
+      line-height: 1.3;
+    }
+
+    /* Remove button */
+    .tile-remove {
+      position: absolute;
+      top: 0.3rem;
+      right: 0.3rem;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(28, 26, 24, 0.55);
+      color: #FAF8F5;
+      font-size: 0.75rem;
+      line-height: 22px;
+      text-align: center;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+      z-index: 10;
+    }
+
+    .tile-remove:hover { background: rgba(28, 26, 24, 0.8); }
+
+    /* File name */
+    .tile-filename {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: var(--color-text-muted);
+      padding: 0.35rem 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ─── Upload Button ──────────────────────────────────────────────── */
+    .upload-btn-wrap {
+      max-width: 640px;
+      margin: var(--gap-md) auto 0;
+      text-align: center;
+      display: none;
+    }
+
+    .upload-btn-wrap.visible {
+      display: block;
+    }
+
+    .upload-btn {
+      font-family: 'Jost', sans-serif;
+      font-size: var(--text-button);
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--color-text-primary);
+      background: transparent;
+      border: 1px solid var(--color-text-primary);
+      padding: 0.85rem 2.5rem;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .upload-btn:hover:not(:disabled) {
+      background: var(--color-text-primary);
+      color: var(--color-bg);
+    }
+
+    .upload-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ─── Error Banner ───────────────────────────────────────────────── */
+    .error-banner {
+      max-width: 640px;
+      margin: var(--gap-sm) auto 0;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: #9A4A4A;
+      text-align: center;
+      display: none;
+    }
+
+    .error-banner.visible {
+      display: block;
+    }
+
+    /* ─── Success State ──────────────────────────────────────────────── */
+    .success-state {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+      padding: clamp(2rem, 5vw, 3.5rem) 1rem;
+      display: none;
+    }
+
+    .success-state.visible {
+      display: block;
+    }
+
+    .success-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 300;
+      color: var(--color-text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .success-body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--color-text-body);
+      line-height: var(--leading-body);
+      margin-bottom: var(--gap-md);
+    }
+
+    .success-reset {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-border);
+      cursor: pointer;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      padding-bottom: 1px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .success-reset:hover {
+      color: var(--color-text-primary);
+      border-bottom-color: var(--color-text-primary);
+    }
+
+    /* ─── Back Link ──────────────────────────────────────────────────── */
+    .back-link-wrap {
+      text-align: center;
+      padding: clamp(2rem, 4vw, 3rem) var(--section-padding-x) clamp(2.5rem, 5vw, 4rem);
+    }
+
+    .back-link {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover { color: var(--color-text-primary); }
+
+    /* ─── Thin Divider ───────────────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      width: 60px;
+      margin: 2rem auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <a href="/" class="nav-brand">D &amp; K</a>
+    <span class="nav-page-title">share photos</span>
+  </nav>
+
+  <!-- Page -->
+  <div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="page-header">
+      <span class="eyebrow">daniel &amp; kukua · june 4, 2026</span>
+      <h1 class="page-heading">Share your photos</h1>
+      <p class="page-subheading">Help us remember every beautiful moment of this day.</p>
+    </header>
+
+    <!-- Upload Section -->
+    <section class="upload-section" aria-label="Photo upload">
+      <div class="container">
+
+        <!-- Guest Name -->
+        <div class="guest-name-field">
+          <label for="guest-name">Your name (optional)</label>
+          <input
+            type="text"
+            id="guest-name"
+            name="guest-name"
+            placeholder="e.g. Auntie Grace"
+            autocomplete="name"
+          />
+        </div>
+
+        <!-- Drop Zone -->
+        <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Click or drop photos here to upload">
+          <!-- Camera SVG icon (line style) -->
+          <svg class="drop-zone-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="12" width="40" height="30" rx="3" ry="3"/>
+            <circle cx="24" cy="27" r="8"/>
+            <path d="M16 12l3-6h10l3 6"/>
+            <circle cx="38" cy="18" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+
+          <p class="drop-zone-primary">Drop your photos here</p>
+          <p class="drop-zone-secondary">or click to browse</p>
+
+          <input
+            type="file"
+            id="file-input"
+            accept="image/*"
+            multiple
+            aria-hidden="true"
+            tabindex="-1"
+          />
+        </div>
+
+        <!-- Validation banner -->
+        <p class="validation-banner" id="validation-banner" role="alert" aria-live="polite"></p>
+
+        <!-- Success State -->
+        <div class="success-state" id="success-state" aria-live="polite">
+          <p class="success-heading">Thank you! 🤍</p>
+          <p class="success-body">Your photos have been received. Daniel &amp; Kukua will treasure them.</p>
+          <button class="success-reset" id="success-reset" type="button">Upload more photos</button>
+        </div>
+
+        <!-- Preview Grid -->
+        <div class="preview-section" id="preview-section" aria-label="Selected photos">
+          <div class="preview-grid" id="preview-grid"></div>
+        </div>
+
+        <!-- Upload Button -->
+        <div class="upload-btn-wrap" id="upload-btn-wrap">
+          <button class="upload-btn" id="upload-btn" type="button">Upload photos</button>
+        </div>
+
+        <!-- Error Banner -->
+        <p class="error-banner" id="error-banner" role="alert" aria-live="polite"></p>
+
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Back link -->
+    <div class="back-link-wrap">
+      <a href="/" class="back-link">&larr; back to the wedding site</a>
+    </div>
+
+  </div><!-- /page-wrapper -->
+
+  <script>
+    'use strict';
+
+    // ─── Cloudinary Config ────────────────────────────────────────────
+    const CLOUDINARY_CLOUD_NAME   = 'YOUR_CLOUD_NAME';      // e.g. 'daniel-kukua'
+    const CLOUDINARY_UPLOAD_PRESET = 'YOUR_UPLOAD_PRESET';  // e.g. 'wedding_guests'
+    const CLOUDINARY_FOLDER       = 'daniel-kukua-wedding';
+
+    // ─── State ───────────────────────────────────────────────────────
+    /** @type {{ file: File, objectUrl: string, tileEl: HTMLElement, xhr?: XMLHttpRequest }[]} */
+    let files = [];
+
+    // ─── DOM refs ────────────────────────────────────────────────────
+    const dropZone        = document.getElementById('drop-zone');
+    const fileInput       = document.getElementById('file-input');
+    const previewSection  = document.getElementById('preview-section');
+    const previewGrid     = document.getElementById('preview-grid');
+    const uploadBtnWrap   = document.getElementById('upload-btn-wrap');
+    const uploadBtn       = document.getElementById('upload-btn');
+    const errorBanner     = document.getElementById('error-banner');
+    const validationBanner = document.getElementById('validation-banner');
+    const successState    = document.getElementById('success-state');
+    const successReset    = document.getElementById('success-reset');
+    const guestNameInput  = document.getElementById('guest-name');
+
+    const MAX_SIZE_BYTES  = 20 * 1024 * 1024; // 20 MB
+    const MAX_FILES       = 20;
+
+    // ─── Drop Zone Interactions ───────────────────────────────────────
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        fileInput.click();
+      }
+    });
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+
+    dropZone.addEventListener('dragleave', (e) => {
+      // Only remove drag-over when leaving the drop zone entirely
+      if (!dropZone.contains(e.relatedTarget)) {
+        dropZone.classList.remove('drag-over');
+      }
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      const dropped = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+      addFiles(dropped);
+    });
+
+    fileInput.addEventListener('change', () => {
+      addFiles(Array.from(fileInput.files));
+      // Reset input so the same file can be re-selected after removal
+      fileInput.value = '';
+    });
+
+    // ─── Add Files ───────────────────────────────────────────────────
+    function addFiles(newFiles) {
+      hideValidationBanner();
+
+      // Max-files check
+      const available = MAX_FILES - files.length;
+      if (available <= 0) {
+        showValidationBanner(`You've already selected ${MAX_FILES} photos. Please remove some before adding more.`);
+        return;
+      }
+
+      if (newFiles.length > available) {
+        showValidationBanner(`You can upload up to ${MAX_FILES} photos at once. Only the first ${available} were added.`);
+        newFiles = newFiles.slice(0, available);
+      }
+
+      const oversized = [];
+
+      newFiles.forEach((file) => {
+        if (file.size > MAX_SIZE_BYTES) {
+          oversized.push(file.name);
+          return;
+        }
+        const objectUrl = URL.createObjectURL(file);
+        const tileEl    = createTile(file, objectUrl);
+        files.push({ file, objectUrl, tileEl });
+        previewGrid.appendChild(tileEl);
+      });
+
+      if (oversized.length > 0) {
+        const names = oversized.length === 1
+          ? `"${oversized[0]}"`
+          : `${oversized.length} files`;
+        showValidationBanner(`${names} ${oversized.length === 1 ? 'is' : 'are'} too large. Please upload photos under 20 MB.`);
+      }
+
+      renderUI();
+    }
+
+    // ─── Create Tile ─────────────────────────────────────────────────
+    function createTile(file, objectUrl) {
+      const tile = document.createElement('div');
+      tile.className = 'preview-tile';
+
+      // Image wrap
+      const imgWrap = document.createElement('div');
+      imgWrap.className = 'preview-tile-img-wrap';
+
+      const img = document.createElement('img');
+      img.src = objectUrl;
+      img.alt = file.name;
+      imgWrap.appendChild(img);
+
+      // Status overlay
+      const statusEl = document.createElement('div');
+      statusEl.className = 'tile-status';
+      statusEl.setAttribute('aria-hidden', 'true');
+
+      const progressTrack = document.createElement('div');
+      progressTrack.className = 'tile-progress-track';
+      const progressBar = document.createElement('div');
+      progressBar.className = 'tile-progress-bar';
+      progressTrack.appendChild(progressBar);
+
+      const iconEl = document.createElement('span');
+      iconEl.className = 'tile-status-icon';
+
+      const errorMsg = document.createElement('span');
+      errorMsg.className = 'tile-error-msg';
+
+      statusEl.appendChild(progressTrack);
+      statusEl.appendChild(iconEl);
+      statusEl.appendChild(errorMsg);
+      imgWrap.appendChild(statusEl);
+
+      // Remove button
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'tile-remove';
+      removeBtn.type = 'button';
+      removeBtn.setAttribute('aria-label', `Remove ${file.name}`);
+      removeBtn.innerHTML = '&times;';
+      removeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        removeFile(tile, objectUrl);
+      });
+      imgWrap.appendChild(removeBtn);
+
+      // File name
+      const nameEl = document.createElement('div');
+      nameEl.className = 'tile-filename';
+      nameEl.textContent = file.name;
+
+      tile.appendChild(imgWrap);
+      tile.appendChild(nameEl);
+
+      // Attach refs to tile for easy access
+      tile._progressBar = progressBar;
+      tile._statusEl    = statusEl;
+      tile._iconEl      = iconEl;
+      tile._errorMsg    = errorMsg;
+      tile._removeBtn   = removeBtn;
+
+      return tile;
+    }
+
+    // ─── Remove File ─────────────────────────────────────────────────
+    function removeFile(tileEl, objectUrl) {
+      URL.revokeObjectURL(objectUrl);
+      files = files.filter(f => f.tileEl !== tileEl);
+      tileEl.remove();
+      renderUI();
+    }
+
+    // ─── Render UI State ─────────────────────────────────────────────
+    function renderUI() {
+      const hasFiles = files.length > 0;
+      previewSection.classList.toggle('visible', hasFiles);
+      uploadBtnWrap.classList.toggle('visible', hasFiles);
+      hideErrorBanner();
+    }
+
+    // ─── Upload ───────────────────────────────────────────────────────
+    uploadBtn.addEventListener('click', startUpload);
+
+    function startUpload() {
+      if (files.length === 0) return;
+      hideErrorBanner();
+      hideValidationBanner();
+
+      // Disable button
+      uploadBtn.disabled = true;
+      uploadBtn.textContent = 'Uploading…';
+
+      // Disable remove buttons during upload
+      files.forEach(f => {
+        if (f.tileEl._removeBtn) f.tileEl._removeBtn.style.display = 'none';
+      });
+
+      const guestName = guestNameInput.value.trim();
+      const uploadPromises = files.map(f => uploadFile(f, guestName));
+
+      Promise.allSettled(uploadPromises).then((results) => {
+        const failures = results.filter(r => r.status === 'rejected' || !r.value);
+        const successes = results.filter(r => r.status === 'fulfilled' && r.value);
+
+        uploadBtn.disabled = false;
+        uploadBtn.textContent = 'Upload photos';
+
+        if (failures.length === 0) {
+          // All succeeded — revoke object URLs and show success
+          files.forEach(f => URL.revokeObjectURL(f.objectUrl));
+          files = [];
+          previewGrid.innerHTML = '';
+          showSuccessState();
+        } else if (successes.length === 0) {
+          showErrorBanner('None of your photos could be uploaded. Please check your connection and try again.');
+          // Re-enable remove buttons
+          files.forEach(f => {
+            if (f.tileEl._removeBtn) f.tileEl._removeBtn.style.display = '';
+          });
+        } else {
+          showErrorBanner(`${failures.length} photo${failures.length > 1 ? 's' : ''} failed to upload. You can try again or remove them.`);
+          // Re-enable remove buttons for failed tiles
+          files.forEach(f => {
+            if (f.tileEl._removeBtn) f.tileEl._removeBtn.style.display = '';
+          });
+        }
+      });
+    }
+
+    // ─── Upload Single File ───────────────────────────────────────────
+    function uploadFile(fileEntry, guestName) {
+      return new Promise((resolve, reject) => {
+        const { file, tileEl } = fileEntry;
+
+        setTileUploading(tileEl);
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        formData.append('folder', CLOUDINARY_FOLDER);
+        if (guestName) {
+          formData.append('context', 'caption=' + encodeURIComponent(guestName));
+        }
+
+        const xhr = new XMLHttpRequest();
+        fileEntry.xhr = xhr;
+
+        xhr.upload.onprogress = (e) => {
+          if (e.lengthComputable) {
+            const pct = Math.round((e.loaded / e.total) * 100);
+            setTileProgress(tileEl, pct);
+          }
+        };
+
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            setTileSuccess(tileEl);
+            resolve(true);
+          } else {
+            let msg = 'Upload failed';
+            try {
+              const resp = JSON.parse(xhr.responseText);
+              if (resp.error && resp.error.message) msg = resp.error.message;
+            } catch (_) { /* ignore parse errors */ }
+            setTileError(tileEl, msg);
+            reject(new Error(msg));
+          }
+        };
+
+        xhr.onerror = () => {
+          setTileError(tileEl, 'Network error');
+          reject(new Error('Network error'));
+        };
+
+        xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`);
+        xhr.send(formData);
+      });
+    }
+
+    // ─── Tile State Helpers ───────────────────────────────────────────
+    function setTileUploading(tile) {
+      tile._statusEl.className = 'tile-status uploading';
+      tile._progressBar.style.width = '0%';
+      tile._iconEl.textContent = '';
+      tile._errorMsg.textContent = '';
+    }
+
+    function setTileProgress(tile, pct) {
+      tile._progressBar.style.width = pct + '%';
+    }
+
+    function setTileSuccess(tile) {
+      tile._statusEl.className = 'tile-status success';
+      tile._iconEl.textContent = '✓';
+      tile._errorMsg.textContent = '';
+    }
+
+    function setTileError(tile, msg) {
+      tile._statusEl.className = 'tile-status error';
+      tile._iconEl.textContent = '✗';
+      tile._errorMsg.textContent = msg || 'Upload failed';
+    }
+
+    // ─── Success State ────────────────────────────────────────────────
+    function showSuccessState() {
+      dropZone.style.display    = 'none';
+      previewSection.classList.remove('visible');
+      uploadBtnWrap.classList.remove('visible');
+      successState.classList.add('visible');
+    }
+
+    successReset.addEventListener('click', () => {
+      successState.classList.remove('visible');
+      dropZone.style.display = '';
+      guestNameInput.value = '';
+      hideErrorBanner();
+      hideValidationBanner();
+    });
+
+    // ─── Banners ──────────────────────────────────────────────────────
+    function showErrorBanner(msg) {
+      errorBanner.textContent = msg;
+      errorBanner.classList.add('visible');
+    }
+    function hideErrorBanner() {
+      errorBanner.textContent = '';
+      errorBanner.classList.remove('visible');
+    }
+    function showValidationBanner(msg) {
+      validationBanner.textContent = msg;
+      validationBanner.classList.add('visible');
+    }
+    function hideValidationBanner() {
+      validationBanner.textContent = '';
+      validationBanner.classList.remove('visible');
+    }
+  </script>
+</body>
+</html>
