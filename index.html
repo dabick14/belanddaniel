@@ -1584,8 +1584,9 @@
         const progress     = clamp(scrolled / spacerHeight, 0, 1);
 
         /* Main card: landscape full-bleed → portrait inset */
-        const vInset = lerp(0, 48, progress);                           // top/bottom: modest
-        const hInset = lerp(0, window.innerWidth * 0.26, progress);     // left/right: deep → portrait
+        const isMobile = window.innerWidth <= 768;
+        const vInset = lerp(0, 48, progress);                                      // top/bottom: modest
+        const hInset = isMobile ? 0 : lerp(0, window.innerWidth * 0.26, progress); // mobile: full-width
         const radius = lerp(0, 16, progress);
         heroCardMain.style.top          = `${vInset}px`;
         heroCardMain.style.bottom       = `${vInset}px`;
