@@ -83,7 +83,7 @@
       padding: 0 var(--section-padding-x);
     }
 
-    section { padding: var(--section-padding-y) 0; }
+    section { padding: var(--section-padding-y) 0; position: relative; z-index: 1; background: var(--color-bg); }
 
     /* ─── Eyebrow label ─────────────────────────────────── */
     .eyebrow {
@@ -313,6 +313,7 @@
     .hero {
       position: sticky;
       top: 0;
+      z-index: 0;
       height: 100svh;
       overflow: hidden;
       display: flex;
@@ -330,14 +331,14 @@
       height: 100%;
     }
 
-    /* Main center card — starts full bleed, contracts on scroll */
+    /* Main center card — starts full bleed, contracts to portrait on scroll */
     .hero-card--main {
       position: absolute;
-      inset: 0;
+      top: 0; right: 0; bottom: 0; left: 0;
       border-radius: 0;
       overflow: hidden;
       background: var(--color-bg-alt);
-      will-change: inset, border-radius;
+      will-change: top, right, bottom, left, border-radius;
     }
 
     .hero-card--main img {
@@ -1580,10 +1581,14 @@
         const spacerHeight = spacer.offsetHeight;
         const progress     = clamp(scrolled / spacerHeight, 0, 1);
 
-        /* Main card: shrink from full-bleed to rounded inset */
-        const margin = lerp(0, 80, progress);
+        /* Main card: landscape full-bleed → portrait inset */
+        const vInset = lerp(0, 48, progress);                           // top/bottom: modest
+        const hInset = lerp(0, window.innerWidth * 0.26, progress);     // left/right: deep → portrait
         const radius = lerp(0, 16, progress);
-        heroCardMain.style.inset        = `${margin}px`;
+        heroCardMain.style.top          = `${vInset}px`;
+        heroCardMain.style.bottom       = `${vInset}px`;
+        heroCardMain.style.left         = `${hInset}px`;
+        heroCardMain.style.right        = `${hInset}px`;
         heroCardMain.style.borderRadius = `${radius}px`;
 
         /* Satellites: fly in from edges with staggered start */
