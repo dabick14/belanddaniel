@@ -18,8 +18,8 @@
     /* ─── Custom Properties ─────────────────────────────── */
     :root {
       /* Base */
-      --color-bg:           #FAF8F5;
-      --color-bg-alt:       #F2EDE6;
+      --color-bg:           #FAF7F2;
+      --color-bg-alt:       #F0E8DC;
       --color-surface:      #FFFFFF;
 
       /* Text */
@@ -27,11 +27,12 @@
       --color-text-body:    #3D3A36;
       --color-text-muted:   #9A9189;
 
-      /* Accent — champagne gold */
-      --color-accent:       #B5A882;
+      /* Accent — fall palette */
+      --color-accent:       #C4622D;
+      --color-accent-2:     #2D6A4F;
 
       /* Borders */
-      --color-border:       #E2DDD6;
+      --color-border:       #DDD3C5;
 
       /* Type scale */
       --text-hero:    clamp(3.5rem, 10vw, 8rem);
@@ -152,6 +153,7 @@
     .section-eyebrow {
       opacity: 0;
       transition: opacity 1s ease;
+      color: var(--color-accent-2);
     }
     .section-eyebrow.visible {
       opacity: 1;
@@ -169,7 +171,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(250, 248, 245, 0.92);
+      background: rgba(250, 247, 242, 0.92);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--color-border);
@@ -199,7 +201,7 @@
       color: var(--color-text-body);
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--color-text-primary); }
+    .nav-links a:hover { color: var(--color-accent-2); }
 
     .nav-right {
       display: flex;
@@ -210,15 +212,15 @@
     .nav-photos-link {
       font-weight: 400;
       color: var(--color-text-primary);
-      border: 1px solid var(--color-border);
+      border: 1px solid var(--color-accent);
       padding: 0.45rem 1rem;
       border-radius: 2px;
       transition: border-color 0.2s, color 0.2s;
       white-space: nowrap;
     }
     .nav-photos-link:hover {
-      border-color: var(--color-accent);
-      color: var(--color-accent);
+      border-color: var(--color-accent-2);
+      color: var(--color-accent-2);
     }
 
     .nav-hamburger {
@@ -282,6 +284,11 @@
       padding: 0.65rem 1.5rem;
       border-radius: 2px;
       margin-top: 0.5rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-overlay-photos:hover {
+      color: var(--color-accent-2);
+      border-color: var(--color-accent-2);
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -299,26 +306,33 @@
       background: var(--color-bg);
     }
 
-    .hero-bg-initials {
+    .hero-image-fallback {
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 300;
-      font-size: 15vw;
-      color: var(--color-text-primary);
-      opacity: 0.05;
-      letter-spacing: 0.1em;
-      pointer-events: none;
-      user-select: none;
-      white-space: nowrap;
+      display: none;
+      background: linear-gradient(135deg, var(--color-bg-alt) 0%, #E8DDD0 50%, var(--color-bg-alt) 100%);
+      z-index: 0;
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(250, 247, 242, 0.35);
+      z-index: 1;
     }
 
     .hero-content {
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .hero-names {
@@ -385,14 +399,92 @@
     /* ═══════════════════════════════════════════════════════
        OUR STORY
     ═══════════════════════════════════════════════════════ */
-    .story-text {
+    .story-chapter {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-lg);
+      align-items: start;
+      margin-bottom: clamp(4rem, 8vw, 7rem);
+    }
+
+    .chapter-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      display: block;
+      margin-bottom: 0.9rem;
+    }
+
+    .chapter-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--text-chapter);
+      color: var(--color-text-primary);
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .chapter-body {
       font-size: var(--text-body);
       line-height: var(--leading-body);
       color: var(--color-text-body);
-      max-width: 640px;
-      margin: 0 auto;
     }
-    .story-text p + p { margin-top: 1.5rem; }
+
+    .chapter-body p + p { margin-top: 1.5rem; }
+
+    .photo-stack {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 0.75rem;
+    }
+
+    .photo-stack .stagger-child:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .photo-item {
+      margin: 0;
+    }
+
+    .photo-item img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-item:first-child img {
+      aspect-ratio: 16/9;
+    }
+
+    .img-placeholder {
+      width: 100%;
+      display: block;
+      background: linear-gradient(135deg, var(--color-bg-alt) 0%, #E8DDD0 50%, var(--color-bg-alt) 100%);
+    }
+
+    .photo-stack .stagger-child:first-child.img-placeholder {
+      aspect-ratio: 16/9;
+    }
+
+    .photo-stack .img-placeholder {
+      aspect-ratio: 4/3;
+    }
+
+    .photo-item figcaption {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-top: 0.4rem;
+      text-align: center;
+    }
 
     .pull-quote {
       font-family: 'Cormorant Garamond', Georgia, serif;
@@ -427,7 +519,7 @@
       font-family: 'Jost', sans-serif;
       font-weight: 300;
       font-size: clamp(2rem, 5vw, 3.5rem);
-      color: var(--color-text-primary);
+      color: var(--color-accent);
       line-height: 1;
       display: block;
     }
@@ -499,9 +591,13 @@
       border-bottom: 1px solid var(--color-accent);
       display: inline-block;
       margin-top: 0.6rem;
-      transition: opacity 0.2s;
+      transition: color 0.2s, border-color 0.2s, opacity 0.2s;
     }
-    .event-map-link:hover { opacity: 0.65; }
+    .event-map-link:hover {
+      color: var(--color-accent-2);
+      border-color: var(--color-accent-2);
+      opacity: 0.65;
+    }
 
     .event-note {
       font-family: 'Jost', sans-serif;
@@ -640,7 +736,7 @@
 
     .copy-btn {
       background: none;
-      border: 1px solid var(--color-border);
+      border: 1px solid var(--color-accent);
       color: var(--color-text-muted);
       font-family: 'Jost', sans-serif;
       font-weight: 300;
@@ -654,8 +750,8 @@
       flex-shrink: 0;
     }
     .copy-btn:hover {
-      border-color: var(--color-accent);
-      color: var(--color-accent);
+      border-color: var(--color-accent-2);
+      color: var(--color-accent-2);
     }
     .copy-btn.copied {
       border-color: #8aac8a;
@@ -805,16 +901,55 @@
       color: var(--color-accent);
       border-bottom: 1px solid var(--color-accent);
       display: inline-block;
-      transition: opacity 0.2s;
+      transition: color 0.2s, border-color 0.2s, opacity 0.2s;
     }
-    .faith-wa-link:hover { opacity: 0.65; }
+    .faith-wa-link:hover {
+      color: var(--color-accent-2);
+      border-color: var(--color-accent-2);
+      opacity: 0.65;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       PROGRAM
+    ═══════════════════════════════════════════════════════ */
+    .program-placeholder {
+      text-align: center;
+      padding: 3rem;
+      border: 1px dashed var(--color-border);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      color: var(--color-text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
     /* ═══════════════════════════════════════════════════════
        FOOTER
     ═══════════════════════════════════════════════════════ */
     footer {
       text-align: center;
-      padding: var(--section-padding-y) var(--section-padding-x);
+      padding: 0 0 var(--section-padding-y);
+    }
+
+    .footer-photo {
+      width: 100%;
+      max-height: 60vh;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin-bottom: var(--gap-lg);
+    }
+
+    .footer-photo-fallback {
+      width: 100%;
+      max-height: 60vh;
+      aspect-ratio: 16 / 7;
+      margin-bottom: var(--gap-lg);
+    }
+
+    .footer-content {
+      text-align: center;
+      padding: 0 var(--section-padding-x);
     }
 
     .footer-quote {
@@ -881,6 +1016,10 @@
 
       .tidbits-grid { grid-template-columns: 1fr; }
 
+      .story-chapter {
+        grid-template-columns: 1fr;
+      }
+
       .float-upload { display: inline-block; }
 
       .payment-block { padding: 1.5rem; }
@@ -904,6 +1043,7 @@
       <li><a href="#tidbits">tidbits</a></li>
       <li><a href="#gifts">gifts</a></li>
       <li><a href="#faq">faq</a></li>
+      <li><a href="#program">programme</a></li>
     </ul>
     <div class="nav-right">
       <a href="upload.html" class="nav-photos-link">Share your photos</a>
@@ -920,6 +1060,7 @@
     <a href="#gifts"    class="nav-ol">gifts</a>
     <a href="#faq"      class="nav-ol">faq</a>
     <a href="#faith"    class="nav-ol">faith</a>
+    <a href="#program"  class="nav-ol">programme</a>
     <a href="upload.html" class="nav-overlay-photos">📷 Share photos</a>
   </div>
 
@@ -928,7 +1069,12 @@
        HERO
   ═══════════════════════════════════════════════════════ -->
   <section class="hero" aria-label="Welcome">
-    <div class="hero-bg-initials" aria-hidden="true">D &amp; K</div>
+    <div class="hero-image-fallback" aria-hidden="true"></div>
+    <img class="hero-image"
+         src="https://raw.githubusercontent.com/dabick14/belanddaniel/main/pictures/EmptyName.jpg"
+         alt="Daniel and Kukua"
+         onerror="this.style.display='none'; this.previousElementSibling.style.display='block';">
+    <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-content">
       <span class="eyebrow hero-eyebrow">you are invited to celebrate</span>
       <h1 class="hero-names">Daniel &amp; Kukua</h1>
@@ -951,12 +1097,30 @@
         <span class="eyebrow section-eyebrow">thank god for meetings after church</span>
       </div>
 
-      <div class="story-text reveal">
-        <p>We're both in First Love City Church. Well… Daniel is in Thika campus (Kenya) now, but he still keeps tabs on the Accra platform, so make of that what you will.</p>
-        <p>We started noticing each other because Bel was pretty loud and had plenty to say in meetings (Pastor C must be tired of her by now), and I was never really quiet either. Somehow that became the beginning of us actually talking.</p>
-        <p>After a few months, I called her. Wanted to take her out, but she was sick, so instead we had a phone conversation.</p>
-        <p>That call was the first proper step. From there, things grew naturally. Just two people who already knew each other a little, getting to know each other properly.</p>
-        <p>And now, by the grace of God, here we are. I got the nice girl. She inherited my mother's project. Pray for us!</p>
+      <div class="story-chapter">
+        <div class="chapter-text reveal">
+          <span class="chapter-label">chapter one</span>
+          <h3 class="chapter-heading">how we met</h3>
+          <div class="chapter-body">
+            <p>We're both in First Love City Church. Well… Daniel is in Thika campus (Kenya) now, but he still keeps tabs on the Accra platform, so make of that what you will.</p>
+            <p>We started noticing each other because Bel was pretty loud and had plenty to say in meetings (Pastor C must be tired of her by now), and I was never really quiet either. Somehow that became the beginning of us actually talking.</p>
+            <p>After a few months, I called her. Wanted to take her out, but she was sick, so instead we had a phone conversation.</p>
+            <p>That call was the first proper step. From there, things grew naturally. Just two people who already knew each other a little, getting to know each other properly.</p>
+            <p>And now, by the grace of God, here we are. I got the nice girl. She inherited my mother's project. Pray for us!</p>
+          </div>
+        </div>
+
+        <div class="photo-stack stagger-parent">
+          <figure class="photo-item stagger-child">
+            <img src="https://raw.githubusercontent.com/dabick14/belanddaniel/main/pictures/EmptyName%201.jpg" alt="Daniel and Kukua" loading="lazy">
+          </figure>
+          <figure class="photo-item stagger-child">
+            <img src="https://raw.githubusercontent.com/dabick14/belanddaniel/main/pictures/EmptyName%202.jpg" alt="Daniel and Kukua" loading="lazy">
+          </figure>
+          <figure class="photo-item stagger-child">
+            <img src="https://raw.githubusercontent.com/dabick14/belanddaniel/main/pictures/EmptyName%203.jpg" alt="Daniel and Kukua" loading="lazy">
+          </figure>
+        </div>
       </div>
 
       <blockquote class="pull-quote reveal">
@@ -1231,13 +1395,33 @@
 
 
   <!-- ═══════════════════════════════════════════════════════
+       PROGRAM
+  ═══════════════════════════════════════════════════════ -->
+  <section id="program" class="section-program">
+    <div class="container">
+      <p class="eyebrow section-eyebrow">the order of the day</p>
+      <div class="program-placeholder">
+        <p>The programme will be shared here soon.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
        FOOTER
   ═══════════════════════════════════════════════════════ -->
   <footer>
-    <hr class="deco-rule">
-    <blockquote class="footer-quote reveal">"He hath made every thing beautiful in his time."</blockquote>
-    <p class="footer-names reveal">Daniel &amp; Kukua · june 4, 2026</p>
-    <p class="footer-made reveal">Made with love ♡</p>
+    <img class="footer-photo"
+         src="https://raw.githubusercontent.com/dabick14/belanddaniel/main/pictures/EmptyName%204.jpg"
+         alt="Daniel and Kukua"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <div class="img-placeholder footer-photo-fallback" style="display:none;" aria-hidden="true"></div>
+    <div class="footer-content">
+      <hr class="deco-rule">
+      <blockquote class="footer-quote reveal">"He hath made every thing beautiful in his time."</blockquote>
+      <p class="footer-names reveal">Daniel &amp; Kukua · june 4, 2026</p>
+      <p class="footer-made reveal">Made with love ♡</p>
+    </div>
   </footer>
 
 
