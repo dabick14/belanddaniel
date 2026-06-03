@@ -525,13 +525,11 @@
     .photo-stack {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 0.75rem;
+      gap: 1rem;
+      align-items: start;
     }
 
-    .photo-stack .stagger-child:first-child {
-      grid-column: 1 / -1;
-    }
+    /* Remove full-width span — both photos are equal columns */
 
     .photo-item {
       margin: 0;
@@ -539,13 +537,19 @@
 
     .photo-item img {
       width: 100%;
-      aspect-ratio: 4/3;
+      aspect-ratio: 3/4;
       object-fit: cover;
       display: block;
+      border-radius: 6px;
     }
 
     .photo-item:first-child img {
-      aspect-ratio: 16/9;
+      aspect-ratio: 3/4;
+    }
+
+    /* Stagger: second photo drops down for editorial offset */
+    .photo-stack .stagger-child:nth-child(2) {
+      margin-top: clamp(2rem, 5vw, 4rem);
     }
 
     .img-placeholder {
@@ -1245,6 +1249,8 @@
         <span class="eyebrow section-eyebrow">thank god for meetings after church</span>
       </div>
       <h2 class="story-display-title reveal">our story</h2>
+
+      <div class="story-chapter">
         <div class="chapter-text reveal">
           <span class="chapter-label">chapter one</span>
           <h3 class="chapter-heading">how we met</h3>
@@ -1261,9 +1267,9 @@
           <figure class="photo-item stagger-child">
             <img src="https://cdn.jsdelivr.net/gh/dabick14/belanddaniel@main/pictures/emptyname-6.jpg" alt="Daniel and Kukua" loading="lazy">
           </figure>
-          <!-- <figure class="photo-item stagger-child">
+          <figure class="photo-item stagger-child">
             <img src="https://cdn.jsdelivr.net/gh/dabick14/belanddaniel@main/pictures/emptyname-7.jpg" alt="Daniel and Kukua" loading="lazy">
-          </figure> -->
+          </figure>
         </div>
       </div>
 
