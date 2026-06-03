@@ -255,7 +255,7 @@
       position: fixed;
       inset: 0;
       background: var(--color-bg);
-      z-index: 99;
+      z-index: 200;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1179,7 +1179,6 @@
         <li><a href="#tidbits">tidbits</a></li>
         <li><a href="#gifts">gifts</a></li>
         <li><a href="#faq">faq</a></li>
-        <li><a href="#program">programme</a></li>
       </ul>
       <div class="nav-right">
         <a href="https://pover.app/event/81497948-808c-4f9f-b3a5-5d005e378dfb" class="nav-cta" target="_blank" rel="noopener noreferrer">Share your photos</a>
@@ -1197,7 +1196,6 @@
     <a href="#gifts"    class="nav-ol">gifts</a>
     <a href="#faq"      class="nav-ol">faq</a>
     <a href="#faith"    class="nav-ol">faith</a>
-    <a href="#program"  class="nav-ol">programme</a>
     <a href="https://pover.app/event/81497948-808c-4f9f-b3a5-5d005e378dfb" class="nav-overlay-photos" target="_blank" rel="noopener noreferrer">📷 Share photos</a>
   </div>
 
@@ -1543,20 +1541,6 @@
     </div>
   </section>
 
-
-  <!-- ═══════════════════════════════════════════════════════
-       PROGRAM
-  ═══════════════════════════════════════════════════════ -->
-  <section id="program" class="section-program">
-    <div class="container">
-      <p class="eyebrow section-eyebrow">the order of the day</p>
-      <div class="program-placeholder">
-        <p>The programme will be shared here soon.</p>
-      </div>
-    </div>
-  </section>
-
-
   <!-- ═══════════════════════════════════════════════════════
        FOOTER
   ═══════════════════════════════════════════════════════ -->
@@ -1689,9 +1673,29 @@
       hamburger.setAttribute('aria-expanded', 'false');
     }
 
-    hamburger.addEventListener('click', openNav);
+    function toggleNav() {
+      if (document.body.classList.contains('nav-open')) {
+        closeNav();
+      } else {
+        openNav();
+      }
+    }
+
+    hamburger.addEventListener('click', toggleNav);
     navOverlayClose.addEventListener('click', closeNav);
     navOlLinks.forEach(link => link.addEventListener('click', closeNav));
+
+    navOverlay.addEventListener('click', (e) => {
+      if (e.target === navOverlay) {
+        closeNav();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+        closeNav();
+      }
+    });
 
 
     /* ─── COUNTDOWN TIMER ────────────────────────────── */
