@@ -200,6 +200,7 @@
     }
     .site-nav.scrolled .nav-brand,
     .site-nav.scrolled .nav-links a { color: var(--color-text-primary); }
+    .site-nav.scrolled .nav-hamburger { color: var(--color-text-primary); }
 
     .nav-brand {
       font-family: 'Cormorant Garamond', Georgia, serif;
@@ -244,10 +245,25 @@
       display: none;
       background: none;
       border: none;
+      color: inherit;
       cursor: pointer;
       font-size: 1.3rem;
       line-height: 1;
       padding: 0.25rem;
+      -webkit-appearance: none;
+      appearance: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .nav-hamburger:focus {
+      outline: none;
+    }
+
+    .nav-hamburger:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+      border-radius: 8px;
     }
 
     /* Mobile overlay */
@@ -1632,7 +1648,6 @@
 
     /* ─── NAV: hero-state / scrolled pill ─────────────── */
     const nav = document.getElementById('site-nav');
-    let lastScrollY = 0;
 
     function updateNav() {
       const scrolled = window.scrollY;
@@ -1644,12 +1659,7 @@
         nav.classList.add('hero-state');
         nav.classList.remove('scrolled');
       }
-      if (scrolled > lastScrollY && scrolled > 80 && !isMobile) {
-        nav.classList.add('hidden');
-      } else {
-        nav.classList.remove('hidden');
-      }
-      lastScrollY = scrolled;
+      nav.classList.remove('hidden');
     }
 
     window.addEventListener('scroll', updateNav, { passive: true });
