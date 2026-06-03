@@ -1138,7 +1138,7 @@
       .hero-scroll-spacer { height: 0; }
 
       /* Mobile hero: static full-screen portrait, no inset animation */
-      .hero-card--main { border-radius: 16px; }
+      .hero-card--main { top: 0; left: 16px; right: 16px; bottom: 0; border-radius: 16px; }
       .hero-names-overlay { bottom: 8%; }
       .hero-names { font-size: clamp(3rem, 14vw, 5rem); }
       .hero-scroll-cue { bottom: 1.5rem; }
@@ -1205,7 +1205,7 @@
   <section class="hero" aria-label="Welcome">
     <div class="hero-gallery">
       <div class="hero-card hero-card--main">
-        <img src="https://cdn.jsdelivr.net/gh/dabick14/belanddaniel@main/pictures/emptyname-0.jpg"
+        <img src="https://cdn.jsdelivr.net/gh/dabick14/belanddaniel@main/pictures/emptyname-11.jpg"
              alt="Daniel and Kukua"
              onerror="this.style.display='none';">
         <div class="hero-names-overlay">
@@ -1646,14 +1646,15 @@
 
     function updateNav() {
       const scrolled = window.scrollY;
-      if (scrolled < window.innerHeight * 0.8) {
-        nav.classList.add('hero-state');
-        nav.classList.remove('scrolled');
-      } else {
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile || scrolled >= window.innerHeight * 0.8) {
         nav.classList.remove('hero-state');
         nav.classList.add('scrolled');
+      } else {
+        nav.classList.add('hero-state');
+        nav.classList.remove('scrolled');
       }
-      if (scrolled > lastScrollY && scrolled > 80 && window.innerWidth > 768) {
+      if (scrolled > lastScrollY && scrolled > 80 && !isMobile) {
         nav.classList.add('hidden');
       } else {
         nav.classList.remove('hidden');
