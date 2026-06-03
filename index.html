@@ -1135,7 +1135,13 @@
       .nav-hamburger { display: block; }
 
       .hero-card--sat { display: none; }
-      .hero-scroll-spacer { height: 80vh; }
+      .hero-scroll-spacer { height: 0; }
+
+      /* Mobile hero: static full-screen portrait, no inset animation */
+      .hero-card--main { border-radius: 16px; }
+      .hero-names-overlay { bottom: 8%; }
+      .hero-names { font-size: clamp(3rem, 14vw, 5rem); }
+      .hero-scroll-cue { bottom: 1.5rem; }
 
       .event-cards { grid-template-columns: 1fr; }
 
@@ -1579,6 +1585,7 @@
 
       window.addEventListener('scroll', () => {
         if (!spacer || !heroCardMain) return;
+        if (window.innerWidth <= 768) return;  /* mobile: static, no animation */
         const scrolled     = window.scrollY;
         const spacerHeight = spacer.offsetHeight;
         const progress     = clamp(scrolled / spacerHeight, 0, 1);
@@ -1646,7 +1653,7 @@
         nav.classList.remove('hero-state');
         nav.classList.add('scrolled');
       }
-      if (scrolled > lastScrollY && scrolled > 80) {
+      if (scrolled > lastScrollY && scrolled > 80 && window.innerWidth > 768) {
         nav.classList.add('hidden');
       } else {
         nav.classList.remove('hidden');
