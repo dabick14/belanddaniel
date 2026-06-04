@@ -1065,6 +1065,53 @@
       margin: 0 auto;
     }
 
+    .program-teaser {
+      background: var(--color-bg);
+    }
+
+    .program-teaser-card {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      text-align: center;
+    }
+
+    .program-teaser-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      color: var(--color-text-primary);
+      line-height: 1.25;
+      margin-bottom: 0.8rem;
+    }
+
+    .program-teaser-copy {
+      max-width: 520px;
+      margin: 0 auto 1.4rem;
+      font-size: var(--text-body);
+      color: var(--color-text-body);
+    }
+
+    .program-teaser-link {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      border: 1px solid var(--color-accent);
+      padding: 0.65rem 1.2rem;
+      transition: color 0.2s, border-color 0.2s, opacity 0.2s;
+    }
+    .program-teaser-link:hover {
+      color: var(--color-accent-2);
+      border-color: var(--color-accent-2);
+      opacity: 0.75;
+    }
+
     /* ═══════════════════════════════════════════════════════
        FOOTER
     ═══════════════════════════════════════════════════════ */
@@ -1192,6 +1239,7 @@
       <ul class="nav-links">
         <li><a href="#story">our story</a></li>
         <li><a href="#schedule">schedule</a></li>
+        <li><a href="programme.html">programme</a></li>
         <li><a href="#tidbits">tidbits</a></li>
         <li><a href="#gifts">gifts</a></li>
         <li><a href="#faq">faq</a></li>
@@ -1208,6 +1256,7 @@
     <button class="nav-overlay-close" id="nav-overlay-close" aria-label="Close menu">&times;</button>
     <a href="#story"    class="nav-ol">our story</a>
     <a href="#schedule" class="nav-ol">schedule</a>
+    <a href="programme.html" class="nav-ol">programme</a>
     <a href="#tidbits"  class="nav-ol">tidbits</a>
     <a href="#gifts"    class="nav-ol">gifts</a>
     <a href="#faq"      class="nav-ol">faq</a>
@@ -1339,6 +1388,19 @@
           <p class="event-note">Photography &amp; Cocktail immediately after Ceremony at the same venue.</p>
           <span class="dress-badge">All things bright &amp; beautiful</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROGRAMME LINK
+  ═══════════════════════════════════════════════════════ -->
+  <section class="program-teaser" aria-label="Wedding programme">
+    <div class="container">
+      <div class="program-teaser-card reveal">
+        <h2 class="program-teaser-title">Wedding Programme · Order of Service</h2>
+        <p class="program-teaser-copy">The full church service sequence is available on a dedicated page so you can quickly find it without interrupting the main story flow.</p>
+        <a class="program-teaser-link" href="programme.html">View Full Programme</a>
       </div>
     </div>
   </section>
@@ -1710,13 +1772,16 @@
 
     /* ─── COUNTDOWN TIMER ────────────────────────────── */
     const targetDate = new Date('2026-06-04T00:00:00').getTime();
+    let cdInterval = null;
 
     function pad(n) { return String(n).padStart(2, '0'); }
 
     function tick() {
       const diff = targetDate - Date.now();
       if (diff <= 0) {
-        clearInterval(cdInterval);
+        if (cdInterval !== null) {
+          clearInterval(cdInterval);
+        }
         document.getElementById('countdown').innerHTML =
           '<p class="countdown-done">Today is the day!</p>';
         return;
@@ -1732,7 +1797,7 @@
     }
 
     tick();
-    const cdInterval = setInterval(tick, 1000);
+    cdInterval = setInterval(tick, 1000);
 
 
     /* ─── FAQ ACCORDION ──────────────────────────────── */
