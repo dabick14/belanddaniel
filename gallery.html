@@ -244,7 +244,8 @@
 
     .lightbox-close,
     .lightbox-prev,
-    .lightbox-next {
+    .lightbox-next,
+    .lightbox-download {
       position: absolute;
       background: none;
       border: none;
@@ -257,11 +258,29 @@
     }
     .lightbox-close:hover,
     .lightbox-prev:hover,
-    .lightbox-next:hover { opacity: 0.65; }
+    .lightbox-next:hover,
+    .lightbox-download:hover { opacity: 0.65; }
 
-    .lightbox-close { top: 1rem; right: 1.25rem; font-size: 2rem; }
+    .lightbox-close,
+    .lightbox-download {
+      top: 1rem;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-close { right: 1rem; font-size: 2rem; }
+    .lightbox-download { right: 4rem; }
+
     .lightbox-prev { left: 0.5rem; top: 50%; transform: translateY(-50%); font-size: 2.5rem; }
     .lightbox-next { right: 0.5rem; top: 50%; transform: translateY(-50%); font-size: 2.5rem; }
+
+    .lightbox-download svg {
+      width: 20px;
+      height: 20px;
+    }
 
     .lightbox-counter {
       position: absolute;
@@ -310,6 +329,13 @@
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
+    <a class="lightbox-download" id="lightbox-download" aria-label="Download photo" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3v12"/>
+        <path d="M7 10l5 5 5-5"/>
+        <path d="M5 19h14"/>
+      </svg>
+    </a>
     <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
     <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous photo">&#8249;</button>
     <img class="lightbox-img" id="lightbox-img" alt="">
@@ -334,6 +360,7 @@
     const lightboxPrev     = document.getElementById('lightbox-prev');
     const lightboxNext     = document.getElementById('lightbox-next');
     const lightboxSpinner  = document.getElementById('lightbox-spinner');
+    const lightboxDownload = document.getElementById('lightbox-download');
 
     const cache = {};        // tag -> array of resources
     const preloaded = {};    // url -> true, once warmed in browser cache
@@ -345,6 +372,9 @@
     }
     function fullUrl(r) {
       return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto,w_1800/${r.public_id}.${r.format}`;
+    }
+    function downloadUrl(r) {
+      return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/fl_attachment/${r.public_id}.${r.format}`;
     }
 
     async function loadTag(tag) {
@@ -444,6 +474,7 @@
 
       lightboxCounter.textContent = `${lightboxIndex + 1} / ${current.length}`;
       lightboxImg.alt = `Photo ${lightboxIndex + 1} of ${current.length}`;
+      lightboxDownload.href = downloadUrl(r);
 
       lightboxImg.classList.remove('loaded');
       lightboxSpinner.classList.add('visible');
