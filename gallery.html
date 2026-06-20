@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery · Daniel &amp; Kukua</title>
+  <meta name="description" content="Engagement and wedding day photos of Daniel and Kukua.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-bg: #FAF7F2;
+      --color-bg-alt: #E8D5B7;
+      --color-surface: #FFFFFF;
+      --color-text-primary: #1C1A18;
+      --color-text-body: #3D3A36;
+      --color-text-muted: #9A9189;
+      --color-accent: #C4622D;
+      --color-accent-2: #2D6A4F;
+      --color-border: #DDD3C5;
+
+      --section-padding-y: clamp(4rem, 9vw, 7rem);
+      --section-padding-x: clamp(1.25rem, 5vw, 3rem);
+      --container-max: 1100px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      line-height: 1.75;
+      background: var(--color-bg);
+      color: var(--color-text-body);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100svh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Nav ─────────────────────────────────────────── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--color-border);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0.85rem var(--section-padding-x);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-family: 'Jost', sans-serif;
+      letter-spacing: 0.08em;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+    }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      color: var(--color-text-primary);
+    }
+
+    .nav-link {
+      color: var(--color-text-muted);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-link:hover {
+      color: var(--color-accent-2);
+      border-color: var(--color-accent-2);
+    }
+
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--section-padding-x);
+    }
+
+    /* ─── Header ──────────────────────────────────────── */
+    .page-header {
+      padding: var(--section-padding-y) 0 2rem;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .page-title {
+      font-size: clamp(2.2rem, 7vw, 4.3rem);
+      line-height: 1.1;
+      color: var(--color-text-primary);
+      margin-bottom: 0.65rem;
+    }
+
+    .page-subtitle {
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.3vw, 1.45rem);
+      color: var(--color-text-muted);
+    }
+
+    /* ─── Tabs ────────────────────────────────────────── */
+    .gallery-tabs {
+      display: flex;
+      justify-content: center;
+      gap: clamp(1.5rem, 5vw, 3rem);
+      margin: 2.5rem 0 2.5rem;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 0;
+    }
+
+    .gallery-tab {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: lowercase;
+      color: var(--color-text-muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 0 0.1rem 0.9rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .gallery-tab.active {
+      color: var(--color-text-primary);
+      border-color: var(--color-accent);
+    }
+
+    .gallery-tab:hover { color: var(--color-text-primary); }
+
+    /* ─── Status ──────────────────────────────────────── */
+    .gallery-status {
+      text-align: center;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--color-text-muted);
+      padding: 3rem 1rem;
+    }
+
+    /* ─── Grid ────────────────────────────────────────── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.85rem;
+      padding-bottom: var(--section-padding-y);
+    }
+
+    .gallery-item {
+      display: block;
+      width: 100%;
+      border: none;
+      padding: 0;
+      background: var(--color-bg-alt);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 4 / 5;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.2s ease, transform 0.4s ease;
+      opacity: 0;
+    }
+
+    .gallery-item img.loaded { opacity: 1; }
+    .gallery-item:hover img { transform: scale(1.03); }
+
+    /* ─── Lightbox ────────────────────────────────────── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(20, 18, 16, 0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-img {
+      max-width: 88vw;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .lightbox-img.loaded { opacity: 1; }
+
+    .lightbox-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 34px;
+      height: 34px;
+      margin: -17px 0 0 -17px;
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      border-top-color: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      animation: lightbox-spin 0.8s linear infinite;
+    }
+    .lightbox-spinner.visible { opacity: 1; }
+
+    @keyframes lightbox-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.85);
+      cursor: pointer;
+      font-size: 1.8rem;
+      line-height: 1;
+      padding: 0.5rem;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover,
+    .lightbox-prev:hover,
+    .lightbox-next:hover { opacity: 0.65; }
+
+    .lightbox-close { top: 1rem; right: 1.25rem; font-size: 2rem; }
+    .lightbox-prev { left: 0.5rem; top: 50%; transform: translateY(-50%); font-size: 2.5rem; }
+    .lightbox-next { right: 0.5rem; top: 50%; transform: translateY(-50%); font-size: 2.5rem; }
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 0; right: 0;
+      text-align: center;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .lightbox-prev, .lightbox-next { font-size: 2rem; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-inner { font-size: 0.66rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Page navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">D &amp; K</a>
+      <a href="index.html" class="nav-link">Back to main page</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="page-header">
+      <span class="eyebrow">daniel &amp; kukua · june 4, 2026</span>
+      <h1 class="page-title">Our Gallery</h1>
+      <p class="page-subtitle">Every moment, captured.</p>
+    </header>
+
+    <div class="gallery-tabs" role="tablist">
+      <button class="gallery-tab active" id="tab-engagement" role="tab" aria-selected="true" data-tag="engagement">engagement</button>
+      <button class="gallery-tab" id="tab-wedding-day" role="tab" aria-selected="false" data-tag="wedding-day">wedding day</button>
+    </div>
+
+    <p class="gallery-status" id="gallery-status">Loading photos…</p>
+    <div class="gallery-grid" id="gallery-grid" role="tabpanel" aria-hidden="false"></div>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous photo">&#8249;</button>
+    <img class="lightbox-img" id="lightbox-img" alt="">
+    <div class="lightbox-spinner" id="lightbox-spinner" aria-hidden="true"></div>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Next photo">&#8250;</button>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+  </div>
+
+  <script>
+    'use strict';
+
+    const CLOUD_NAME = 'dtyufmaq9';
+
+    const tabs   = document.querySelectorAll('.gallery-tab');
+    const grid   = document.getElementById('gallery-grid');
+    const status = document.getElementById('gallery-status');
+
+    const lightbox        = document.getElementById('lightbox');
+    const lightboxImg      = document.getElementById('lightbox-img');
+    const lightboxCounter  = document.getElementById('lightbox-counter');
+    const lightboxClose    = document.getElementById('lightbox-close');
+    const lightboxPrev     = document.getElementById('lightbox-prev');
+    const lightboxNext     = document.getElementById('lightbox-next');
+    const lightboxSpinner  = document.getElementById('lightbox-spinner');
+
+    const cache = {};        // tag -> array of resources
+    const preloaded = {};    // url -> true, once warmed in browser cache
+    let current = [];        // resources currently shown
+    let lightboxIndex = -1;
+
+    function thumbUrl(r) {
+      return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,g_auto,w_600,h_750,q_auto,f_auto/${r.public_id}.${r.format}`;
+    }
+    function fullUrl(r) {
+      return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto,w_1800/${r.public_id}.${r.format}`;
+    }
+
+    async function loadTag(tag) {
+      if (cache[tag]) return cache[tag];
+      const res = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/${tag}.json`);
+      if (!res.ok) throw new Error('list unavailable');
+      const data = await res.json();
+      const resources = (data.resources || []).sort(
+        (a, b) => new Date(a.created_at) - new Date(b.created_at)
+      );
+      cache[tag] = resources;
+      return resources;
+    }
+
+    function renderGrid(resources) {
+      current = resources;
+      grid.innerHTML = '';
+      resources.forEach((r, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'gallery-item';
+        btn.setAttribute('aria-label', `Open photo ${i + 1}`);
+
+        const img = document.createElement('img');
+        img.src = thumbUrl(r);
+        img.loading = 'lazy';
+        img.alt = '';
+        img.addEventListener('load', () => img.classList.add('loaded'));
+
+        btn.appendChild(img);
+        btn.addEventListener('click', () => openLightbox(i));
+        grid.appendChild(btn);
+      });
+    }
+
+    async function showTag(tag) {
+      status.textContent = 'Loading photos…';
+      status.style.display = 'block';
+      grid.innerHTML = '';
+
+      try {
+        const resources = await loadTag(tag);
+        if (resources.length === 0) {
+          status.textContent = 'Photos are on their way — check back soon!';
+          return;
+        }
+        status.style.display = 'none';
+        renderGrid(resources);
+      } catch (err) {
+        status.textContent = 'Photos are on their way — check back soon!';
+      }
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        showTag(tab.dataset.tag);
+      });
+    });
+
+    /* ─── Lightbox ────────────────────────────────────── */
+    function openLightbox(index) {
+      lightboxIndex = index;
+      updateLightbox();
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+
+    function preload(url) {
+      if (preloaded[url]) return;
+      preloaded[url] = true;
+      const img = new Image();
+      img.src = url;
+    }
+
+    function preloadNeighbors() {
+      if (current.length < 2) return;
+      const nextR = current[(lightboxIndex + 1) % current.length];
+      const prevR = current[(lightboxIndex - 1 + current.length) % current.length];
+      preload(fullUrl(nextR));
+      preload(fullUrl(prevR));
+    }
+
+    function updateLightbox() {
+      const r = current[lightboxIndex];
+      if (!r) return;
+      const url = fullUrl(r);
+
+      lightboxCounter.textContent = `${lightboxIndex + 1} / ${current.length}`;
+      lightboxImg.alt = `Photo ${lightboxIndex + 1} of ${current.length}`;
+
+      lightboxImg.classList.remove('loaded');
+      lightboxSpinner.classList.add('visible');
+      lightboxImg.onload = () => {
+        lightboxImg.classList.add('loaded');
+        lightboxSpinner.classList.remove('visible');
+      };
+      lightboxImg.src = url;
+      preloaded[url] = true;
+
+      preloadNeighbors();
+    }
+
+    function showPrev() {
+      lightboxIndex = (lightboxIndex - 1 + current.length) % current.length;
+      updateLightbox();
+    }
+    function showNext() {
+      lightboxIndex = (lightboxIndex + 1) % current.length;
+      updateLightbox();
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', showPrev);
+    lightboxNext.addEventListener('click', showNext);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    });
+
+    /* ─── Init ────────────────────────────────────────── */
+    showTag('engagement');
+  </script>
+</body>
+</html>
